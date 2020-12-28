@@ -27,6 +27,16 @@ const sections = document.querySelectorAll("section");
  * 
 */
 
+/*Test if an element is in the viewport*/ 
+const isInViewport = (elem) => {
+	const bounding = elem.getBoundingClientRect();
+	return (
+		bounding.top >= 0 &&
+		bounding.left >= 0 &&
+		bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+};
 
 
 /**
@@ -36,6 +46,12 @@ const sections = document.querySelectorAll("section");
 */
 
 // build the nav
+for(let i = 0; i < sections.length; i++){
+    const newElement = document.createElement("li");
+    newElement.className = 'menu__link';
+    newElement.innerText = sections.dataset.nav;
+    navbar.appendChild(newElement)
+};    
 
 
 // Add class 'active' to section when near top of viewport
