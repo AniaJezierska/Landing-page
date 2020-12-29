@@ -17,8 +17,8 @@
  * Define Global Variables
  * 
 */
-const navBar = document.getElementById("navbar__list");
-const sections = document.querySelectorAll("section");
+const navBar = document.getElementById('navbar__list');
+const sections = document.querySelectorAll('section');
 
 
 /**
@@ -47,7 +47,7 @@ const isInViewport = (elem) => {
 
 // build the nav
 for(let i = 0; i < sections.length; i++){
-    const newElement = document.createElement("li");
+    const newElement = document.createElement('li');
     newElement.className = 'menu__link';
     newElement.innerText = sections.dataset.nav;
     navbar.appendChild(newElement)
@@ -58,6 +58,15 @@ for(let i = 0; i < sections.length; i++){
 
 
 // Scroll to anchor ID using scrollTO event
+window.addEventListener('scroll', function() {
+    for (const section of sections) {
+        if (inViewport(section)) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    }
+});
 
 
 /**
@@ -71,5 +80,3 @@ for(let i = 0; i < sections.length; i++){
 // Scroll to section on link click
 
 // Set sections as active
-
-
