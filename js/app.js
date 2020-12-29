@@ -61,9 +61,9 @@ for(let i = 0; i < sections.length; i++){
 window.addEventListener('scroll', function() {
     for (const section of sections) {
         if (inViewport(section)) {
-            section.classList.add('active');
+            section.classList.add('your-active-class');
         } else {
-            section.classList.remove('active');
+            section.classList.remove('your-active-class');
         }
     }
 });
