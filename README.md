@@ -10,4 +10,9 @@ This project aims to give you real-world scenarios of manipulating the DOM by bu
 * differentiation of the active section to improve the comfort of use
 * scrolling the item to the appropriate section when the user clicks the navigation item 
 
+## Technology
+
+* JavaScript
+* HTML
+* CSS
 
