@@ -11,13 +11,13 @@
  * 
  * JS Standard: ESlint
  * 
-*/
+ */
 
 /**
  * Define Global Variables
  * 
-*/
-const navBar = document.getElementById('navbar__list');
+ */
+const navBar = document.querySelector('#navbar__list');
 const sections = document.querySelectorAll('section');
 
 
@@ -25,55 +25,63 @@ const sections = document.querySelectorAll('section');
  * End Global Variables
  * Start Helper Functions
  * 
-*/
-
-/*Test if an element is in the viewport*/ 
-const isInViewport = (elem) => {
-	const bounding = elem.getBoundingClientRect();
-	return (
-		bounding.top >= 0 &&
-		bounding.left >= 0 &&
-		bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-		bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-	);
-};
-
+ */
 
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
-*/
+ */
 
-// build the nav
-for(let i = 0; i < sections.length; i++){
-    const newElement = document.createElement('li');
-    newElement.className = 'menu__link';
-    newElement.innerText = sections.dataset.nav;
-    navbar.appendChild(newElement)
-};    
+// Build the nav
+sections.forEach((sections) => {
+    const navElement = document.createElement('li');
+    navElement.className = 'menu__link';
+    navElement.dataset.nav = sections.id;
+    navElement.innerText = sections.dataset.nav;
+    navBar.appendChild(navElement);
+});
+
+// Scroll to section on click.
+navBar.addEventListener('click', (event) => {
+    event.preventDefault();
+    const clicked = document.querySelector(`#${event.target.dataset.nav}`);
+    clicked.scrollIntoView({
+        behavior: 'smooth',
+    });
+});
 
 
 // Add class 'active' to section when near top of viewport
 
+function isInViewport(elem) {
+    const bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top + 150 >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 150 &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
-// Scroll to anchor ID using scrollTO event
-window.addEventListener('scroll', function() {
-    for (const section of sections) {
-        if (inViewport(section)) {
-            section.classList.add('your-active-class');
+window.addEventListener('scroll', activSection);
+
+function activSection() {
+    const eachSec = document.querySelectorAll('section');
+    for (i = 0; i < eachSec.length; i++) {
+        if (!isInViewport(eachSec[i])) {
+            eachSec[i].classList.remove('your-active-class');
         } else {
-            section.classList.remove('your-active-class');
+            eachSec[i].classList.add('your-active-class');
         }
     }
-});
-
+}
 
 /**
  * End Main Functions
  * Begin Events
  * 
-*/
+ */
 
 // Build menu 
 
